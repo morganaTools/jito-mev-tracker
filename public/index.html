@@ -14,9 +14,11 @@
 <body>
   <h1>Jito MEV Tracker</h1>
   <input type="text" id="voteInput" placeholder="Enter votePubkey" />
-  <button onclick="loadChart()">Load MEV</button>
-  <canvas id="mevChart"></canvas>
+  <button id="loadBtn">Load MEV</button>
 
-  <script src="/client.js"></script>
+  <div id="errorBox" style="color: red; margin-top: 10px;"></div>
+  <div id="chartBox" style="margin-top: 30px;"></div>
+
+  <script src="./client.js"></script>
 </body>
 </html>
