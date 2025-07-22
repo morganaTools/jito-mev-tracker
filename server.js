@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.get('/api/payments/:votePubkey', async (req, res) => {
   const { votePubkey } = req.params;
   try {
-    const jitoUrl = \`https://stats.jito.wtf/api/v1/validators/\${votePubkey}/payments\`;
+    const jitoUrl = 'https://stats.jito.wtf/api/v1/validators/' + votePubkey + '/payments';
     const response = await fetch(jitoUrl);
     const data = await response.json();
     res.json(data);
