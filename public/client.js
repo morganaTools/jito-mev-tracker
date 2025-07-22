@@ -1,17 +1,28 @@
+document.getElementById('loadBtn').addEventListener('click', loadChart);
+
 async function loadChart() {
-  const voteInput = document.getElementById('voteInput');
-  const votePubkey = voteInput.value.trim();
+  const votePubkey = document.getElementById('voteInput').value.trim();
   if (!votePubkey) return alert('Please enter a votePubkey');
+
+  const chartBox = document.getElementById('chartBox');
+  const errorBox = document.getElementById('errorBox');
+  chartBox.innerHTML = '';
+  errorBox.textContent = '';
 
   try {
     const res = await fetch('/api/payments/' + votePubkey);
+    if (!res.ok) throw new Error('API error');
+
     const data = await res.json();
+    if (!Array.isArray(data)) throw new Error('Invalid data');
 
     const rewards = data.map(p => p.amount / 1e9).reverse();
     const times = data.map(p => new Date(p.timestamp * 1000).toLocaleString()).reverse();
 
-    const ctx = document.getElementById('mevChart').getContext('2d');
-    new Chart(ctx, {
+    const canvas = document.createElement('canvas');
+    chartBox.appendChild(canvas);
+
+    new Chart(canvas.getContext('2d'), {
       type: 'line',
       data: {
         labels: times,
@@ -34,7 +45,7 @@ async function loadChart() {
       }
     });
   } catch (err) {
-    alert('❌ Failed to load data. Check votePubkey or server status.');
     console.error(err);
+    errorBox.textContent = '⚠️ Failed to load data. Jito API might be temporarily unavailable.';
   }
 }
