@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <title>Jito MEV Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { font-family: sans-serif; text-align: center; margin: 20px; }
     input { padding: 8px; width: 300px; }
+    button { padding: 8px 16px; margin-left: 10px; }
     canvas { max-width: 800px; margin-top: 30px; }
   </style>
 </head>
 <body>
   <h1>Jito MEV Tracker</h1>
   <input type="text" id="voteInput" placeholder="Enter votePubkey" />
-  <button id="loadBtn">Load MEV</button>
+  <button onclick="loadChart()">Load MEV</button>
   <canvas id="mevChart"></canvas>
 
-  <script type="module" src="./client.js"></script>
+  <script src="/client.js"></script>
 </body>
 </html>
