@@ -39,3 +39,17 @@ You can easily deploy this to:
 - Vercel (convert to serverless function)
 - Replit
 - Railway
+
+## 🛡️ Compliance Notice
+This tool uses only public, unauthenticated endpoints provided by the Jito Foundation, specifically:
+
+```bash
+https://stats.jito.wtf/api/v1/validators/<votePubkey>/payments
+```
+No private API keys, scraping, or data aggregation is involved.
+
+This tool does not scan or compare other validators — it only fetches data for the votePubkey manually entered by the user.
+
+The intent is solely informational, to help validators track their own MEV rewards in a transparent and visual way.
+
+✅ This implementation is SFDP-compliant and designed with network fairness and transparency in mind.
