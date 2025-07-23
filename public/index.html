@@ -8,7 +8,7 @@
     body { font-family: sans-serif; text-align: center; margin: 20px; }
     input { padding: 8px; width: 300px; }
     button { padding: 8px 16px; margin-left: 10px; }
-    canvas { max-width: 1200px; margin-top: 30px; }
+    canvas { max-width: 1600px; margin-top: 30px; }
   </style>
 </head>
 <body>
@@ -17,7 +17,9 @@
   <button id="loadBtn">Load MEV</button>
 
   <div id="errorBox" style="color: red; margin-top: 10px;"></div>
-  <div id="chartBox" style="margin-top: 30px;"></div>
+  <div style="overflow-x: auto;">
+    <div id="chartBox" style="min-width: 1500px; height: 400px;"></div>
+  </div>
 
   <script src="./client.js"></script>
 </body>
