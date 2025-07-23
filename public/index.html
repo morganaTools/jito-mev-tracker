@@ -5,10 +5,42 @@
   <title>Jito MEV Tracker</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: sans-serif; text-align: center; margin: 20px; }
-    input { padding: 8px; width: 300px; }
-    button { padding: 8px 16px; margin-left: 10px; }
-    canvas { max-width: 1600px; margin-top: 30px; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    input {
+      padding: 8px;
+      width: 300px;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #errorBox {
+      color: red;
+      margin-top: 10px;
+    }
+
+    #chartWrapper {
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    #chartBox {
+      min-width: 2000px;
+      height: 400px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
   </style>
 </head>
 <body>
@@ -16,9 +48,12 @@
   <input type="text" id="voteInput" placeholder="Enter votePubkey" />
   <button id="loadBtn">Load MEV</button>
 
-  <div id="errorBox" style="color: red; margin-top: 10px;"></div>
-  <div style="overflow-x: auto;">
-    <div id="chartBox" style="min-width: 1500px; height: 400px;"></div>
+  <div id="errorBox"></div>
+
+  <div id="chartWrapper">
+    <div id="chartBox">
+      <canvas id="mevChart"></canvas>
+    </div>
   </div>
 
   <script src="./client.js"></script>
