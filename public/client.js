@@ -1,12 +1,12 @@
 document.getElementById('loadBtn').addEventListener('click', loadChart);
 
+let chartInstance = null;
+
 async function loadChart() {
   const votePubkey = document.getElementById('voteInput').value.trim();
   if (!votePubkey) return alert('Please enter a votePubkey');
 
-  const chartBox = document.getElementById('chartBox');
   const errorBox = document.getElementById('errorBox');
-  chartBox.innerHTML = '';
   errorBox.textContent = '';
 
   try {
@@ -19,12 +19,13 @@ async function loadChart() {
     const rewards = data.map(p => p.mev_rewards / 1e9).reverse();
     const labels = data.map(p => `Epoch ${p.epoch}`).reverse();
 
-    const canvas = document.createElement('canvas');
-    canvas.style.width = '100%';
-    canvas.style.height = '400px';
-    chartBox.appendChild(canvas);
+    const ctx = document.getElementById('mevChart').getContext('2d');
 
-    new Chart(canvas.getContext('2d'), {
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
       type: 'line',
       data: {
         labels,
@@ -33,33 +34,36 @@ async function loadChart() {
           data: rewards,
           borderColor: 'blue',
           backgroundColor: 'rgba(0,0,255,0.1)',
-          fill: true
+          fill: true,
+          pointRadius: 2,
+          borderWidth: 2,
         }]
       },
       options: {
-  responsive: true,
-  scales: {
-  x: {
-    ticks: {
-      autoSkip: false,
-      maxRotation: 60,
-      minRotation: 60
-    }
-  },
-  y: {
-    beginAtZero: true
-  }
-},
-  plugins: {
-    legend: {
-      display: true
-    },
-    tooltip: {
-      mode: 'index',
-      intersect: false
-    }
-  }
-}
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            ticks: {
+              autoSkip: false,
+              maxRotation: 60,
+              minRotation: 60
+            }
+          },
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
     });
   } catch (err) {
     console.error(err);
