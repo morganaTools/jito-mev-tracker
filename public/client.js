@@ -16,8 +16,8 @@ async function loadChart() {
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error('Invalid data');
 
-    const rewards = data.map(p => p.amount / 1e9).reverse();
-    const times = data.map(p => new Date(p.timestamp * 1000).toLocaleString()).reverse();
+    const rewards = data.map(p => p.mev_rewards / 1e9).reverse();
+    const labels = data.map(p => `Epoch ${p.epoch}`).reverse();
 
     const canvas = document.createElement('canvas');
     chartBox.appendChild(canvas);
@@ -25,9 +25,9 @@ async function loadChart() {
     new Chart(canvas.getContext('2d'), {
       type: 'line',
       data: {
-        labels: times,
+        labels,
         datasets: [{
-          label: 'MEV Reward (SOL)',
+          label: 'MEV Rewards (SOL)',
           data: rewards,
           borderColor: 'blue',
           backgroundColor: 'rgba(0,0,255,0.1)',
@@ -39,13 +39,13 @@ async function loadChart() {
         plugins: {
           title: {
             display: true,
-            text: 'Latest MEV Rewards from Jito'
+            text: 'MEV Rewards per Epoch (Jito)'
           }
         }
       }
     });
   } catch (err) {
     console.error(err);
-    errorBox.textContent = '⚠️ Failed to load data. Jito API might be temporarily unavailable.';
+    errorBox.textContent = '⚠️ Failed to load data. Jito API might be unavailable or votePubkey is invalid.';
   }
 }
