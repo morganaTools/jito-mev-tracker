@@ -64,7 +64,7 @@ You can deploy this easily on:
 - The chart currently includes all epochs, even those with zero rewards, which leads to long unreadable x-axis.
 
 **Solution:**
-- This is a known limitation. We plan to filter out epochs without rewards in a future update.
+- This is a known limitation. I plan to filter out epochs without rewards in a future update.
 - For now, simply scroll horizontally or zoom out in the browser.
 
 
