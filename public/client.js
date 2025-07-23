@@ -45,9 +45,10 @@ async function loadChart() {
         scales: {
           x: {
             ticks: {
-              autoSkip: false,
+              autoSkip: true,
               maxRotation: 60,
-              minRotation: 60
+              minRotation: 60,
+              maxTicksLimit: 30
             }
           },
           y: {
