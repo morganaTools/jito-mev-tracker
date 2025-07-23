@@ -35,14 +35,34 @@ async function loadChart() {
         }]
       },
       options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'MEV Rewards per Epoch (Jito)'
-          }
-        }
+  responsive: true,
+  scales: {
+    x: {
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 20, // показує максимум 20 підписів
+        callback: function(value, index, ticks) {
+          // Показує кожен 5-й елемент
+          return index % 5 === 0 ? this.getLabelForValue(value) : '';
+        },
+        maxRotation: 45,
+        minRotation: 45
       }
+    },
+    y: {
+      beginAtZero: true
+    }
+  },
+  plugins: {
+    legend: {
+      display: true
+    },
+    tooltip: {
+      mode: 'index',
+      intersect: false
+    }
+  }
+}
     });
   } catch (err) {
     console.error(err);
