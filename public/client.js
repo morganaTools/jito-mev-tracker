@@ -45,10 +45,11 @@ async function loadChart() {
         scales: {
           x: {
             ticks: {
-              autoSkip: true,
+              callback: function(value, index) {
+                return index % 10 === 0 ? this.getLabelForValue(value) : '';
+              },
               maxRotation: 60,
-              minRotation: 60,
-              maxTicksLimit: 30
+              minRotation: 60
             }
           },
           y: {
