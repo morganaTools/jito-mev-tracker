@@ -54,15 +54,35 @@ You can deploy this easily on:
 
 ## 🛠 Troubleshooting
 
-**Error: `500` or `Failed to fetch MEV rewards`**  
-🔸 Reason: The Jito API might be temporarily down or unreachable.  
-🔸 Check manually:
+### 1. ⚠️ Chart appears squished or unreadable
 
-```
-https://stats.jito.wtf/api/v1/validators/YOUR_VOTE_PUBKEY/payments
-```
+**Symptoms:**
+- Epoch labels are compressed and overlap.
+- Happens when MEV rewards start only from a high epoch (e.g., 300+), with earlier epochs having no rewards.
 
-If this URL doesn't work in your browser, the API is likely down.
+**Explanation:**
+- The chart currently includes all epochs, even those with zero rewards, which leads to long unreadable x-axis.
+
+**Solution:**
+- This is a known limitation. We plan to filter out epochs without rewards in a future update.
+- For now, simply scroll horizontally or zoom out in the browser.
+
+
+### 2. ❌ `500` Error or `Failed to fetch MEV rewards`
+
+**Symptoms:**
+- Error message appears after clicking **Load MEV**.
+- No data is loaded into the chart.
+
+**Possible reasons:**
+- Invalid or inactive `votePubkey`.
+- The Jito API endpoint is temporarily down or unreachable.
+
+**Manual check:**
+Visit this URL in your browser (replace `YOUR_VOTE_PUBKEY` with your actual key):
+```
+https://kobe.mainnet.jito.network/api/v1/validators/YOUR_VOTE_PUBKEY
+```
 
 ---
 
