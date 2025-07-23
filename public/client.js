@@ -20,6 +20,8 @@ async function loadChart() {
     const labels = data.map(p => `Epoch ${p.epoch}`).reverse();
 
     const canvas = document.createElement('canvas');
+    canvas.style.width = '100%';
+    canvas.style.height = '400px';
     chartBox.appendChild(canvas);
 
     new Chart(canvas.getContext('2d'), {
@@ -37,22 +39,17 @@ async function loadChart() {
       options: {
   responsive: true,
   scales: {
-    x: {
-      ticks: {
-        autoSkip: true,
-        maxTicksLimit: 20, // показує максимум 20 підписів
-        callback: function(value, index, ticks) {
-          // Показує кожен 5-й елемент
-          return index % 5 === 0 ? this.getLabelForValue(value) : '';
-        },
-        maxRotation: 45,
-        minRotation: 45
-      }
-    },
-    y: {
-      beginAtZero: true
+  x: {
+    ticks: {
+      autoSkip: false,
+      maxRotation: 60,
+      minRotation: 60
     }
   },
+  y: {
+    beginAtZero: true
+  }
+},
   plugins: {
     legend: {
       display: true
